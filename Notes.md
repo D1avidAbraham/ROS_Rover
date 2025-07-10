@@ -18,6 +18,9 @@
 * The Robot should be able to move based of a LLM/VLM 
 * The Robot should be able to be controled by a user (teleoperations)
 * The Robot should code should be in a docker container 
+* The Robot should have a custume PCB that 
+* The Robot should use an IMU to calulate the location of the robot
+* The Robot should be able to control the motors with Pulse Width Modulation 
 
 ## Part C - data models
 
