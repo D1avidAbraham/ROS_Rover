@@ -29,19 +29,47 @@ Give the desired Linear and angular velocity is will give back the angular dista
   </tr>
   <tr>
     <td>Desired forward speed</td>
-    <td>Desired yaw rate</td>
-    <td>Half the distance between the two treads</td>
-    <td>Left-tread linear speed</td>
-    <td>Right-tread linear speed</td>
-    <td>Tread wheel radius</td>
-    <td>Left wheel angular speed</td>
-    <td>Right wheel angualr speed</td>
+    <td>$V$</td>
+    <td>$m/s$</td>
 
   </tr>
   <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
+    <td>Desired yaw rate</td>
+    <td>$\omega$</td>
+    <td>$rad/s$</td>
+  </tr>
+  <tr>
+     <td>Half the distance between the two treads</td>
+    <td>$b/2$</td>
+    <td>$m$</td>
+    
+  </tr>
+  <tr>
+    <td>Left-tread linear speed</td>
+    <td>$v_l$</td>
+    <td>$m/s$</td>
+  </tr>
+  <tr>
+    <td>Right-tread linear speed</td>
+    <td>$v_r$</td>
+    <td>$m/s$</td>
+  </tr>
+  <tr>
+    <td>Tread wheel radius</td>
+    <td>$R$</td>
+    <td>$m$</td>
+  </tr>
+  <tr>
+    <td>Left wheel angular speed</td>
+    <td>$\omega_l$</td>
+    <td>$rad/s$</td>
+
+  </tr>
+  <tr>
+    <td>Right wheel angualr speed</td>
+    <td>$\omega_r$</td>
+    <td>$rad/s$</td>
+
   </tr>
 </table>
 
