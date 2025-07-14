@@ -19,7 +19,7 @@ $\omega$ = angular velocity <br>
 
 Give the desired Linear and angular velocity is will give back the angular distance the DC motor has to travel 
 
-### Inverse Velocity Kinematics Equations For Tread drivetrain
+### Inverse Velocity Kinematics Equations For Tread Drivetrain
 
 <table>
   <tr>
@@ -72,6 +72,14 @@ Give the desired Linear and angular velocity is will give back the angular dista
 
   </tr>
 </table>
+
+<b>Find the linear velocity of the two motors give the $V$ and $\omega$</b><br>
+$v_l = V - (b/2)* \omega$<br>
+$v_r = V + (b/2)* \omega$<br>
+
+<b>Find the angular velocity of the two motors give the $V$ and $\omega$</b><br>
+$w_l = \dfrac{V - (b/2)* \omega}{R}$<br>
+$w_r = \dfrac{V + (b/2)* \omega}{R}$<br>
 
 
 
