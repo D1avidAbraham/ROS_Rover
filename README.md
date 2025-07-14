@@ -8,8 +8,14 @@ A configuration space, denoted by $q$ specifies the locations on the robot.
 
 ### Inverse Velocity Kinematics Equations
 
-$\theta_{left} = \dfrac{v_x}{r} - \dfrac{L}{2}\dfrac{\omega}{r}$
+$\theta_{left} = \dfrac{v_x}{r} - \dfrac{L}{2}\dfrac{\omega}{r}$<br>
 $\theta_{right} = \dfrac{v_y}{r} + \dfrac{L}{2}\dfrac{\omega}{r}$
+
+
+$L$ = distance between the two wheels <br>
+$r$ = raduis of the wheel <br>
+$v$ = linear velocity <br>
+$\omega$ = angular velocity <br>
 
 
 
