@@ -37,5 +37,28 @@ NA
 * Read libar data 
 
 
+E. 
+Draw a stupid simple prototype
+G. 
+Understand what the future of my project is going to look like 
+H. 
+Drill into the components 
+architecture of the project -- spend a lot of time here 
+I. 
+Picking your stack 
+pick the tool that does the job the best and the simplest 
+J.
+overall development process 
+- create a project skeleton
+		- basic folder structure
+		- development environments 
+		- version control
+* setting up the database and creating data models
+	  - build the backend routes
+		  - API endpoints
+    - Frontend interface 
+	    - Connect to backend
+	- project interaction 
+
 
 
