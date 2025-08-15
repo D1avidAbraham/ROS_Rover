@@ -83,5 +83,9 @@ $w_r = \dfrac{V + (b/2)* \omega}{R}$<br>
 
 
 
+The motors are TS-25GA370
+
+
+
 # Reference 
 1. https://www.roboticsbook.org/S51_diffdrive_state.html
