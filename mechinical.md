@@ -21,3 +21,10 @@ https://www.youtube.com/watch?v=3ozgxPi_tl0&t=23s
 
 
 [def]: image.png
+
+
+1 : 269 
+2 : 269 + 20
+
+3: 155
+4 250 

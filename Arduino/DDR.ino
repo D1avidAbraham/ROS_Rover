@@ -4,7 +4,7 @@
 class DriveTrain{
     public:
         // Radius, Length, Max_W_rpm, MotorAPin1, MotorAPin2, MotorAPwm, MotorBPin1, MotorBPin2, MotorBPwm
-        DriveTrain(float radius, float length, float W_max, int motorAPin1, int motorAPin2, int motorAPwm, int motorBPin1, int motorBPin2, int motorBPwm);
+        DriveTrain(float radius, float length, float W_max, float dutyCycle, float PWMmin, int motorAPin1, int motorAPin2, int motorAPwm, int motorBPin1, int motorBPin2, int motorBPwm);
         void ddrSetup();
         void encoderSetup(double kp, double ki, double kd, int encoderAPinA, int encoderAPinB, int encoderBPinA, int encoderBPinB);
         void PWMmove(int x);
@@ -16,6 +16,8 @@ class DriveTrain{
         float _radius;
         float _length;
         float _W_max;
+        float _dutyCycle;
+        float _PWMmin;
         int _motorAPin1;
         int _motorAPin2;
         int _motorAPwm;
@@ -38,10 +40,12 @@ class DriveTrain{
         Encoder* _EncoderB;
 };
 
-DriveTrain::DriveTrain(float radius, float length, float W_max, int motorAPin1, int motorAPin2, int motorAPwm, int motorBPin1, int motorBPin2, int motorBPwm){
+DriveTrain::DriveTrain(float radius, float length, float W_max, float dutyCycle, float PWMmin, int motorAPin1, int motorAPin2, int motorAPwm, int motorBPin1, int motorBPin2, int motorBPwm){
     _radius = radius;
     _length = length;
     _W_max = W_max;
+    _dutyCycle = dutyCycle;
+    _PWMmin = PWMmin;
     _motorAPin1 = motorAPin1;
     _motorAPin2 = motorAPin2;
     _motorAPwm = motorAPwm;
@@ -89,16 +93,16 @@ void DriveTrain::PWMmove(int x){
     if (x > 0 ){ 
         digitalWrite(_motorAPin1, HIGH);
         digitalWrite(_motorAPin2, LOW);
-        digitalWrite(_motorBPin1, LOW);
-        digitalWrite(_motorBPin2, HIGH);
     }else{
         digitalWrite(_motorAPin1, LOW);
         digitalWrite(_motorAPin2, HIGH);
-        digitalWrite(_motorBPin1, HIGH);
-        digitalWrite(_motorBPin2, LOW);
+
     }
-    analogWrite(_motorAPwm, abs(x));
-    analogWrite(_motorBPwm, abs(x));
+    _SetpointA  = x; 
+    _InputA = _EncoderA->read();
+    _motorA->Compute();
+    analogWrite(_motorAPwm, _OutputA);
+
 }
 
 void DriveTrain::move(int V_x, int W){
@@ -118,23 +122,26 @@ void DriveTrain::move(int V_x, int W){
         digitalWrite(_motorBPin1, HIGH);
         digitalWrite(_motorBPin2, LOW);
     }
-  
-    analogWrite(_motorAPwm, abs(left));
-    analogWrite(_motorBPwm, abs(right));
+    left =  (abs(left)/_dutyCycle)*255;
+    right = (abs(right)/_dutyCycle)*255;
+    analogWrite(_motorAPwm, left);
+    analogWrite(_motorBPwm, right);
 }
 
 float DriveTrain::leftDDR(int V_x, int W){
-  return abs(V_x/_radius) - ((_length/2)*(W/_radius));
+  return (V_x/_radius) - ((_length/2)*(W/_radius));
 }
 
 float DriveTrain::rightDDR(int V_x, int W){
-  return  abs(V_x/_radius) + ((_length/2)*(W/_radius));
+  return  (V_x/_radius) + ((_length/2)*(W/_radius));
 }
 
 
-const float radius = .047625;
+const float radius = 0.0238125;
 const float length = .1397;
 const float W_max = 200; 
+const float dutyCycle = 600;
+const float PWMmin = 120; 
 const int motorAPin1 = 4;
 const int motorAPin2 = 5;
 const int motorAPwm = 3; 
@@ -153,19 +160,19 @@ const int encoderBPinB = 12;
 
 int V_x = 0;
 int W = 0;
-DriveTrain Drive(radius, length, W_max, motorAPin1, motorAPin2, motorAPwm, motorBPin1, motorBPin2, motorBPwm);
+DriveTrain Drive(radius, length, W_max, dutyCycle, PWMmin, motorAPin1, motorAPin2, motorAPwm, motorBPin1, motorBPin2, motorBPwm);
 
 void setup(){
     Serial.begin(115200);
     Serial.setTimeout(50);
     Drive.ddrSetup();
-    Drive.encoderSetup(kp, ki, kd, encoderAPinA, encoderAPinB, encoderBPinA, encoderBPinB);
+    //Drive.encoderSetup(kp, ki, kd, encoderAPinA, encoderAPinB, encoderBPinA, encoderBPinB);
 
 }
 
 void loop(){
-    if (Serial.available()>= 1) {
-        /*
+    /*if (Serial.available()>= 1) {
+        
         String input = Serial.readString();
         int commaIndex = input.indexOf(',');
         String part1 = input.substring(0, commaIndex);
@@ -174,11 +181,14 @@ void loop(){
         // Convert to float
         V_x = part1.toFloat();
         W = part2.toFloat();
-        */
+      
         V_x = Serial.parseFloat(); 
         W = Serial.parseFloat(); 
         Drive.move(V_x, W);
     }
      //Drive.move(V_x, W);
+    */
+
+    Drive.PWMmove(100);
 
 }
